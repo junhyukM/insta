@@ -8,8 +8,8 @@
         <div class="navbar-nav">
           <a class="nav-link" href="{% url 'accounts:signup' %}">signup</a>
           <a class="nav-link" href="{% url 'accounts:login' %}">login</a>
-          <a class="nav-link" href="#">Pricing</a>
-          <a class="nav-link disabled">Disabled</a>
+          <a class="nav-link" href="{% url 'accounts:logout' %}">logout</a>
+          <a class="nav-link disabled">{{user}}</a>
         </div>
       </div>
     </div>
