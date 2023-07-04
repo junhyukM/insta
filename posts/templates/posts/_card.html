@@ -16,10 +16,11 @@
     </div>
     <ul class="list-group list-group-flush">
         {% for comment in post.comment_set.all %}
-            <li class="list-group-item">{{comment.user}} : {{comment.content}}</li>
+            <li class="list-group-item"><a href="{% url 'accounts:profile' comment.user.username %}">{{comment.user}}</a> : {{comment.content}}</li>
         {% endfor %}
     </ul>
 
+    {% if comment_form %}
     <div class="card-body">
         <form action="{% url 'posts:comments_create' post.id %}" method="POST">
             {% csrf_token %}
@@ -27,5 +28,5 @@
             <input type="submit" class="btn btn-sm btn-primary">
         </form>
     </div>
-
+    {% endif %}
 </div>

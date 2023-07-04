@@ -8,7 +8,7 @@
 
     <div>
         {% for post in user_info.post_set.all %}
-        
+            {% include 'posts/_card.html' %}
         {% endfor%}
 
     </div>
