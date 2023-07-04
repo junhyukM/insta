@@ -3,5 +3,9 @@
     <div class="card-body">
         <p class="card-text">{{post.content}}</p>
         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+
+        {% if post.user == user %}
+        <a href="" class="btn btn-danger">delete</a>
+        {% endif %}
     </div>
 </div>
