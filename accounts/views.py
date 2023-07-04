@@ -37,3 +37,12 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return redirect('accounts:login')
+
+def profile(request, username):
+    user_info = request.user
+
+    context = {
+        'user_info': user_info,
+    }
+
+    return render(request, 'accounts/profile.html', context)

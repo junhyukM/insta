@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div>
+        <h1>{{user_info.username}}</h1>
+
+    </div>
+
+    <div>
+        {% for post in user_info.post_set.all %}
+        
+        {% endfor%}
+
+    </div>
+{% endblock %}
