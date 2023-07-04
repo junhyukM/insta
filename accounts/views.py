@@ -17,4 +17,9 @@ def signup(request):
     }
     return render(request, 'accounts/form.html', context)
 
+def login(request):
+    if request.method == 'POST':
+        pass
+    else:
+        pass
 
