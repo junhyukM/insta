@@ -1,4 +1,5 @@
-<div class="card" style="width: 18rem;">
+{% load bootstrap5 %}
+<div class="card mb-3" style="width: 18rem;">
     <img src="{{post.image.url}}" class="card-img-top" alt="...">
     <div class="card-body">
         <p class="card-text">{{post.content}}</p>
@@ -7,5 +8,23 @@
         {% if post.user == user %}
         <a href="{% url 'posts:delete' post.id %}" class="btn btn-danger btn-sm">delete</a>
         {% endif %}
+
     </div>
+    <div class="card-footer text-body-secondary">
+        {{post.created_at}}
+    </div>
+    <ul class="list-group list-group-flush">
+        {% for comment in post.comment_set.all %}
+            <li class="list-group-item">{{comment.user}} : {{comment.content}}</li>
+        {% endfor %}
+    </ul>
+
+    <div class="card-body">
+        <form action="{% url 'posts:comments_create' post.id %}" method="POST">
+            {% csrf_token %}
+            {% bootstrap_form comment_form %}
+            <input type="submit" class="btn btn-sm btn-primary">
+        </form>
+    </div>
+
 </div>
