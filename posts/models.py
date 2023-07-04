@@ -7,7 +7,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)    
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    image = models.ImageField()
+    image = models.ImageField(upload_to='pic/%m/%d')
 
 
 class Comment(models.Model):
