@@ -48,3 +48,18 @@ def profile(request, username):
     }
 
     return render(request, 'accounts/profile.html', context)
+
+def following(request, id):
+    User = get_user_model()
+    
+    me = request.user
+    you = User.objects.get(id=id)
+
+    if me != you:
+        # if me in you.follower.all():
+        if you in me.following.all():
+            me.following.remove(you)
+        else:
+            me.following.add(you)
+
+    return redirect('accounts:profile', you.username)
