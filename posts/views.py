@@ -46,3 +46,23 @@ def comments_create(request, id):
             comment.post = post
             comment.save()
             return redirect('posts:index')
+        
+
+def likes(request, id):
+    user = request.user
+    post = Post.objects.get(id=id)
+
+    # 둘중 아무거나 사용해도 됨      
+    # user.like_posts.add(post)  
+    # post.like_users.add(user)
+
+    # 이미 좋아요 누른 경우
+    # 아래의 두 코드 다 같은 기능
+    # if post.like_users.filter(id=user.id).exists():
+    if user in post.like_users.all():
+        user.like_posts.remove(post)
+    # 아직 좋아요 안누른 경우
+    else:
+        user.like_posts.add(post)
+
+    return redirect('posts:index')
