@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import CustomUserCreationForm, CustomAuthenticationForm, CustomUserChangeForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -40,9 +41,11 @@ def logout(request):
     auth_logout(request)
     return redirect('accounts:login')
 
+
 def profile(request, username):
     User = get_user_model()
-    user_info = User.objects.get(username=username)
+    # user_info = User.objects.get(username=username)
+    user_info = get_object_or_404(User, username=username)
 
     context = {
         'user_info': user_info,
@@ -50,6 +53,7 @@ def profile(request, username):
 
     return render(request, 'accounts/profile.html', context)
 
+@login_required
 def following(request, id):
     User = get_user_model()
     
@@ -65,6 +69,7 @@ def following(request, id):
 
     return redirect('accounts:profile', you.username)
 
+@login_required
 def edit(request):
     if request.method == 'POST':
         form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
