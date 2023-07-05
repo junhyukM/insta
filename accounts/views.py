@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm, CustomAuthenticationForm
+from .forms import CustomUserCreationForm, CustomAuthenticationForm, CustomUserChangeForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import get_user_model
@@ -8,9 +8,10 @@ from django.contrib.auth import get_user_model
 
 def signup(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            auth_login(request, user)
             return redirect('posts:index')
     else:
         form = CustomUserCreationForm()
@@ -63,3 +64,19 @@ def following(request, id):
             me.following.add(you)
 
     return redirect('accounts:profile', you.username)
+
+def edit(request):
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:profile', request.user.username)
+
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'accounts/form.html', context)

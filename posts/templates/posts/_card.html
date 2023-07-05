@@ -24,11 +24,13 @@
         {{post.created_at|timesince}}
 
     </div>
+    {% if request.resolver_match.url_name != 'profile' %}
     <ul class="list-group list-group-flush">
         {% for comment in post.comment_set.all %}
             <li class="list-group-item"><a href="{% url 'accounts:profile' comment.user.username %}">{{comment.user}}</a> : {{comment.content}}</li>
         {% endfor %}
     </ul>
+    {% endif %}
 
     {% if comment_form %}
     <div class="card-body">
