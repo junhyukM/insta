@@ -9,6 +9,11 @@ class Post(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     image = models.ImageField(upload_to='pic/%m/%d')
 
+    # M 대 N 연결
+    like_users = models.ManyToManyField(get_user_model(), related_name='like_posts')
+    # post.like_users.all()
+    # user.like_posts.all()
+
 
 class Comment(models.Model):
     content = models.TextField()
