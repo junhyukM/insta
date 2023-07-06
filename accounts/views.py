@@ -4,6 +4,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from posts.models import Post
 # Create your views here.
 
 
@@ -97,3 +98,17 @@ def bookmark_list(request):
     }
 
     return render(request, 'accounts/bookmark_list.html', context)
+
+@login_required
+def new_speed(request):
+    user = request.user
+    # filter : 조건에 맞는 것만 필터
+    # Lookups (__in) : 
+    posts = Post.objects.filter(user__in=user.following.all())
+    
+    context = {
+        'posts': posts,
+    }
+
+    return render(request, 'posts/index.html', context)
+

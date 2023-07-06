@@ -9,6 +9,8 @@ urlpatterns = [
     # READ 부분에서 username으로 bookmark-list 를 인식할 수 있는 문제가 있어(str 이라서) 순서를 위로 올림
     path('bookmark-list/', views.bookmark_list, name='bookmark_list'),
 
+    path('new-speed/', views.new_speed, name='new_speed'),
+    
     # CREATE
     path("signup/", views.signup, name='signup'),
     # UPDATE
@@ -22,5 +24,6 @@ urlpatterns = [
 
     # CREATE
     path('<int:id>/following/', views.following, name='following'),
+
 
 ]
