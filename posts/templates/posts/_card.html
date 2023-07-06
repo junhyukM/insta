@@ -2,7 +2,11 @@
 <div class="card mb-3" style="width: 18rem;">
     <div class="card-header">
         <a href="{% url 'posts:bookmarks' post.id %}" class="text-reset text-decoration-none">
-            <i class="fa-regular fa-bookmark"></i> 
+            {% if user in post.bookmark_users.all %}
+                <i class="fa-solid fa-bookmark"></i> 
+            {% else %}
+                <i class="fa-regular fa-bookmark"></i> 
+            {% endif %}
         </a>
     </div>
     <img src="{{post.image.url}}" class="card-img-top" alt="...">

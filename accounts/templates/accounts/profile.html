@@ -8,6 +8,7 @@
                 <h1 class="text-center">{{user_info.username}}</h1>
                 <p>follower : {{user_info.follower.all|length}}명</p>
                 <p>following : {{user_info.following.all|length}}명</p>
+
                 {% if user != user_info %}
                     {% if user in user_info.follower.all %}
                         <a href="{% url 'accounts:following' user_info.id %}" class="btn btn-danger">unfollow</a>
@@ -16,6 +17,7 @@
                     {% endif %}
                 {% else %}
                     <a href="{% url 'accounts:edit' %}" class="btn btn-primary">edit</a>    
+                    <a href="{% url 'accounts:bookmark_list' %}" class="btn btn-primary">bookmark list</a>
                 {% endif %}
             </div>
         </div>

@@ -85,3 +85,13 @@ def edit(request):
     }
 
     return render(request, 'accounts/form.html', context)
+
+@login_required
+def bookmark_list(request):
+    bookmarks = request.user.bookmark_set.all()
+
+    context = {
+        'bookmarks': bookmarks,
+    }
+
+    return render(request, 'accounts/bookmark_list.html', context)

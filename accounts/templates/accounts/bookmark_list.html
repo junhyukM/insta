@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="m-2">
+        <div class="row">
+            <img src="{{user.profile_image.url}}" alt="" class="col-3 rounded-circle">    
+            <div class="col-9">
+                <h1 class="text-center">{{user.username}}</h1>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for post in bookmarks %}
+                <div class="col">
+                    {% include 'posts/_card.html' %}
+                </div>
+            {% endfor%}
+        </div>
+    </div>
+{% endblock %}

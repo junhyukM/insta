@@ -17,7 +17,7 @@ class User(AbstractUser):
     )
     bookmarks = models.ManyToManyField(
         Post,
-        through='Bookmark'
+        through='Bookmark',
         related_name='bookmark_users',
     )
 
