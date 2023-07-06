@@ -1,5 +1,10 @@
 {% load bootstrap5 %}
 <div class="card mb-3" style="width: 18rem;">
+    <div class="card-header">
+        <a href="{% url 'posts:bookmarks' post.id %}" class="text-reset text-decoration-none">
+            <i class="fa-regular fa-bookmark"></i> 
+        </a>
+    </div>
     <img src="{{post.image.url}}" class="card-img-top" alt="...">
     <div class="card-body">
         <p>

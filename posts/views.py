@@ -69,3 +69,6 @@ def likes(request, id):
         user.like_posts.add(post)
 
     return redirect('posts:index')
+
+def bookmarks(request, id):
+    pass
