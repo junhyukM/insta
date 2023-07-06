@@ -12,10 +12,13 @@
 
     <div>
         <div class="row row-cols-1 row-cols-md-3 g-4">
-            {% for post in bookmarks %}
+            {% for bookmark in bookmarks %}
+                <!-- with : 변수 할당 -->
+                {% with post=bookmark.post %}
                 <div class="col">
                     {% include 'posts/_card.html' %}
                 </div>
+                {% endwith %}
             {% endfor%}
         </div>
     </div>
