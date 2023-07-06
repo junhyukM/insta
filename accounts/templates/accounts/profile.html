@@ -3,7 +3,11 @@
 {% block content %}
     <div class="m-2">
         <div class="row">
-            <img src="{{user_info.profile_image.url}}" alt="" class="col-3 rounded-circle">    
+            {% if user_info.profile %}
+                <img src="{{user_info.profile_image.url}}" alt="" class="col-3 rounded-circle">    
+            {% else %}
+                <img src="https://picsum.photos/200" alt="" class="col-3 rounded-circle">
+            {% endif %}
             <div class="col-9">
                 <h1 class="text-center">{{user_info.username}}</h1>
                 <p>follower : {{user_info.follower.all|length}}명</p>

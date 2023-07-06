@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
+{% load socialaccount %}
 
 {% block content %}
     <form action="" method="POST" enctype="multipart/form-data">
@@ -7,5 +8,8 @@
         {% bootstrap_form form %}
         <input type="submit" class="btn btn-primary">
     </form>
+
+    <a href="{% provider_login_url 'github' next='/posts/'' %}" class="btn btn-primary">github</a>
+    <a href="{% provider_login_url 'google' next='/posts/'' %}" class="btn btn-primary">google</a>
 {% endblock %}
 
