@@ -88,7 +88,9 @@ def edit(request):
 
 @login_required
 def bookmark_list(request):
-    bookmarks = request.user.bookmark_set.all()
+    # order_by : 정렬
+    # 작성시간 기준 내림차순정렬 ('-' : 최신 순 정렬)
+    bookmarks = request.user.bookmark_set.all().order_by('-created_at')
 
     context = {
         'bookmarks': bookmarks,
