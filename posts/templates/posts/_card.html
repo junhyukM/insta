@@ -14,11 +14,11 @@
         <p>
             <!-- <a href="{% url 'posts:likes' post.id %}" class="text-reset text-decoration-none"> -->
                 {% if user in post.like_users.all %}
-                    <i class="fa-solid fa-heart" style="color: red" data-post-id="{{post.id}}"></i>
+                    <i class="fa-solid fa-heart" style="color: red" data-post-id="{{post.id}}">{{post.like_users.all|length}}</i>
                 {% else %}
-                    <i class="fa-regular fa-heart" data-post-id="{{post.id}}"></i>
+                    <i class="fa-regular fa-heart" data-post-id="{{post.id}}">{{post.like_users.all|length}}</i>
                 {% endif %}
-                {{post.like_users.all|length}} 명이 좋아합니다.
+                 명이 좋아합니다.
             <!-- </a> -->
         </p>
         <p class="card-text">{{post.content}}</p>

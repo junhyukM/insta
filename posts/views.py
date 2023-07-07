@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .forms import PostForm, CommentForm
 from .models import Post
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
 # Create your views here.
 def index(request):
@@ -83,3 +84,26 @@ def bookmarks(request, id):
         user.bookmarks.add(post)
 
     return redirect('posts:index')
+
+def likes_async(request, id):
+    # context = {
+    #     'msg': 'hello',
+    #     'id': id,
+    # }
+
+    user = request.user
+    post = Post.objects.get(id=id)
+
+    if user in post.like_users.all():
+        user.like_posts.remove(post)
+        status = False
+    else:
+        user.like_posts.add(post)
+        status = True
+
+    context = {
+        'status': status,
+        'count': len(post.like_users.all())
+    }
+
+    return JsonResponse(context)

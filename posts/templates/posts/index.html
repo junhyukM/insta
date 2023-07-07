@@ -15,9 +15,34 @@
         likeButtons.forEach((btn)=>{
             // console.log(btn)
             btn.addEventListener('click', (event)=>{
-                console.log(event.target)
+                // console.log(event.target)
+                const postId = event.target.dataset.postId
+                // console.log(postId)
+
+                // 장고로 user가 postId 게시물을 좋아합니다라는 요청을 보낸다
+                likeRequest(btn, postId)
+
             })
         })
 
+        async function likeRequest(btn, postId) {
+            const likeURL = `/posts/${postId}/likes-async/`
+            // console.log(likeURL)
+            const response = await fetch(likeURL)
+            const result = await response.json()
+            console.log(result)
+
+            if (result.status) {
+                btn.style.color = 'red'
+                btn.classList.remove('fa-regular')
+                btn.classList.add('fa-solid')
+                btn.innerHTML = result.count
+            } else {
+                btn.style.color = 'black'
+                btn.classList.remove('fa-solid')
+                btn.classList.add('fa-regular')
+                btn.innerHTML = result.count
+            }
+        }
     </script>
 {% endblock %}

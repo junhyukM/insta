@@ -16,6 +16,8 @@ urlpatterns = [
     
     # CREATE
     path('<int:id>/likes/', views.likes, name='likes'),
+    path('<int:id>/likes-async/', views.likes_async, name='likes_async'),
 
     path('<int:id>/bookmarks', views.bookmarks, name='bookmarks'),
+
 ]
