@@ -6,4 +6,18 @@
     {% for post in posts %}
         {% include 'posts/_card.html' %}
     {% endfor %}
+
+    <script>
+        // console.log('hello')
+        const likeButtons = document.querySelectorAll('i.fa-heart')
+        // console.log(likeButtons)
+
+        likeButtons.forEach((btn)=>{
+            // console.log(btn)
+            btn.addEventListener('click', (event)=>{
+                console.log(event.target)
+            })
+        })
+
+    </script>
 {% endblock %}

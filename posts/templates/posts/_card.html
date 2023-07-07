@@ -12,14 +12,14 @@
     <img src="{{post.image.url}}" class="card-img-top" alt="...">
     <div class="card-body">
         <p>
-            <a href="{% url 'posts:likes' post.id %}" class="text-reset text-decoration-none">
+            <!-- <a href="{% url 'posts:likes' post.id %}" class="text-reset text-decoration-none"> -->
                 {% if user in post.like_users.all %}
-                    <i class="fa-solid fa-heart" style="color: red"></i>
+                    <i class="fa-solid fa-heart" style="color: red" data-post-id="{{post.id}}"></i>
                 {% else %}
-                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-heart" data-post-id="{{post.id}}"></i>
                 {% endif %}
                 {{post.like_users.all|length}} 명이 좋아합니다.
-            </a>
+            <!-- </a> -->
         </p>
         <p class="card-text">{{post.content}}</p>
         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
